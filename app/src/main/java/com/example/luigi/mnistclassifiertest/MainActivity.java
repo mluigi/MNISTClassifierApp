@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Net not loaded.", Toast.LENGTH_SHORT).show();
             }
-        }
-        return true;
+        }        return true;
     }
 
     private void copyInputStreamToFile(InputStream in, File file) {
@@ -99,12 +98,14 @@ public class MainActivity extends AppCompatActivity {
                 int green = Color.green(bitmap.getPixel(i, j));
                 int blue = Color.blue(bitmap.getPixel(i, j));
                 double gray = (red + green + blue) / 3;
-                gray /= 255;
-                gray = 1 - gray;
-                image.putScalar(i, j, gray);
+                System.out.print(gray + " ");
+                image.putScalar(i*28+j, gray);
+                if((i*28+j)%28==0){
+                    System.out.print("\n");
+                }
             }
         }
-        System.out.println(image);
+        /*System.out.println(image);
         INDArray result = net.output(image);
         int num = 0;
         double prob = 0;
@@ -116,6 +117,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         TextView textView = (TextView) findViewById(R.id.textView2);
-        textView.setText(num + ", " + (prob * 100) + "%");
+        textView.setText(num + ", " + (prob * 100) + "%");*/
     }
 }
