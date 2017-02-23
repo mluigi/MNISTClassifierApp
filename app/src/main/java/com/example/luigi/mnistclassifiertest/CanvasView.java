@@ -1,5 +1,6 @@
 package com.example.luigi.mnistclassifiertest;
 
+import android.app.Activity;
 import android.view.View;
 
 import android.content.Context;
@@ -76,6 +77,7 @@ public class CanvasView extends View {
 
     private void upTouch() {
         mPath.lineTo(mX, mY);
+        ((MainActivity) getContext()).predict();
 
     }
 

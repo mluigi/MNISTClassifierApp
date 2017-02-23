@@ -64,9 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (net != null) {
-            if (item.getItemId() == R.id.netItem) {
+        if (item.getItemId() == R.id.netItem) {
+            if (net != null) {
                 startActivity(new Intent(this, NetConfActivity.class));
+            } else {
+                Toast.makeText(this, "Net not loaded.", Toast.LENGTH_SHORT).show();
             }
         }
         return true;
@@ -96,25 +98,24 @@ public class MainActivity extends AppCompatActivity {
                 int red = Color.red(bitmap.getPixel(i, j));
                 int green = Color.green(bitmap.getPixel(i, j));
                 int blue = Color.blue(bitmap.getPixel(i, j));
-
                 double gray = (red + green + blue) / 3;
                 gray /= 255;
                 gray = 1 - gray;
-                image.putScalar(i, j, gray / 255);
+                image.putScalar(i, j, gray);
             }
         }
         System.out.println(image);
         INDArray result = net.output(image);
-        int num=0;
-        double prob=0;
+        int num = 0;
+        double prob = 0;
         for (int i = 0; i < result.columns() - 1; i++) {
             double tmp = result.getDouble(i);
-            if (tmp>prob){
-                prob=tmp;
+            if (tmp > prob) {
+                prob = tmp;
                 num = i;
             }
         }
         TextView textView = (TextView) findViewById(R.id.textView2);
-        textView.setText(num+", "+(prob*100)+"%");
+        textView.setText(num + ", " + (prob * 100) + "%");
     }
 }
