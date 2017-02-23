@@ -1,6 +1,5 @@
 package com.example.luigi.mnistclassifiertest;
 
-import android.app.Activity;
 import android.view.View;
 
 import android.content.Context;
@@ -35,17 +34,18 @@ public class CanvasView extends View {
         mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
-        mPaint.setStrokeWidth(50f);
+        mPaint.setStrokeWidth(75f);
+        mCanvas = new Canvas();
+        setDrawingCacheEnabled(true);
     }
 
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-
         // your Canvas will draw onto the defined Bitmap
-        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.RGB_565);
-        mCanvas = new Canvas(mBitmap);
+        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_4444);
+        mCanvas.setBitmap(mBitmap);
     }
 
     @Override
@@ -105,5 +105,9 @@ public class CanvasView extends View {
 
     public Bitmap getmBitmap() {
         return mBitmap;
+    }
+
+    public Canvas getmCanvas() {
+        return mCanvas;
     }
 }

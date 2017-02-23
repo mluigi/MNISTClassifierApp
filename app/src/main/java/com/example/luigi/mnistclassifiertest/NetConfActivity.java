@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import static com.example.luigi.mnistclassifiertest.MainActivity.net;
+//import static com.example.luigi.mnistclassifiertest.MainActivity.net;
 
 public class NetConfActivity extends AppCompatActivity {
 
@@ -13,7 +13,7 @@ public class NetConfActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_conf);
         TextView textView = (TextView) findViewById(R.id.textView4);
-        textView.setText(net.getDefaultConfiguration().toString());
+        //textView.setText(net.getDefaultConfiguration().toString());
 
     }
 }

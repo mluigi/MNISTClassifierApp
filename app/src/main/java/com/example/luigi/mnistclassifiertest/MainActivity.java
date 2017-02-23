@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.datavec.image.loader.ImageLoader;
+import org.datavec.image.loader.NativeImageLoader;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -65,12 +67,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.netItem) {
-            if (net != null) {
+            /*if (net != null) {
                 startActivity(new Intent(this, NetConfActivity.class));
             } else {
                 Toast.makeText(this, "Net not loaded.", Toast.LENGTH_SHORT).show();
-            }
-        }        return true;
+            }*/
+        }
+        return true;
     }
 
     private void copyInputStreamToFile(InputStream in, File file) {
@@ -89,24 +92,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void predict() {
-        Bitmap bitmap = ((CanvasView) findViewById(R.id.canvasView)).getmBitmap();
+        Bitmap bitmap = canvasView.getDrawingCache();
         bitmap = Bitmap.createScaledBitmap(bitmap, 28, 28, false);
-        INDArray image = Nd4j.zeros(28 * 28);
+        INDArray image = Nd4j.zeros(28, 28);
         for (int i = 0; i < bitmap.getHeight() - 1; i++) {
             for (int j = 0; j < bitmap.getWidth() - 1; j++) {
-                int red = Color.red(bitmap.getPixel(i, j));
-                int green = Color.green(bitmap.getPixel(i, j));
-                int blue = Color.blue(bitmap.getPixel(i, j));
-                double gray = (red + green + blue) / 3;
-                System.out.print(gray + " ");
-                image.putScalar(i*28+j, gray);
-                if((i*28+j)%28==0){
-                    System.out.print("\n");
-                }
+                int pixel = bitmap.getPixel(i, j);
+                image.putScalar(i, j, pixel == Color.BLACK ? 0.99 : 0.0);
+                System.out.print(image.getDouble(i,j) + " ");
             }
+            System.out.print("\n");
         }
-        /*System.out.println(image);
-        INDArray result = net.output(image);
+        INDArray result = net.output(image.linearView());
         int num = 0;
         double prob = 0;
         for (int i = 0; i < result.columns() - 1; i++) {
@@ -116,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
                 num = i;
             }
         }
+        System.out.println(num + ", " + (prob * 100) + "%");
         TextView textView = (TextView) findViewById(R.id.textView2);
-        textView.setText(num + ", " + (prob * 100) + "%");*/
+        textView.setText(num + ", " + (prob * 100) + "%");
     }
 }
