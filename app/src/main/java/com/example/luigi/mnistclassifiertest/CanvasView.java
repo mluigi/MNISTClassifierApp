@@ -76,6 +76,7 @@ public class CanvasView extends View {
 
     private void upTouch() {
         mPath.lineTo(mX, mY);
+
     }
 
     @Override
