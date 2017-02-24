@@ -1,5 +1,6 @@
 package com.example.luigi.mnistclassifiertest;
 
+import android.graphics.BlurMaskFilter;
 import android.view.View;
 
 import android.content.Context;
@@ -26,12 +27,10 @@ public class CanvasView extends View {
     public CanvasView(Context c, AttributeSet attrs) {
         super(c, attrs);
         context = c;
-
         mPath = new Path();
-
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.BLACK);
+        mPaint.setColor(Color.LTGRAY);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeWidth(75f);
@@ -43,7 +42,6 @@ public class CanvasView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        // your Canvas will draw onto the defined Bitmap
         mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_4444);
         mCanvas.setBitmap(mBitmap);
     }
@@ -77,7 +75,6 @@ public class CanvasView extends View {
 
     private void upTouch() {
         mPath.lineTo(mX, mY);
-        ((MainActivity) getContext()).predict();
 
     }
 

@@ -33,15 +33,6 @@
     </android.support.percent.PercentRelativeLayout>
 
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="clearCanvas"
-        android:text="@string/button" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -50,5 +41,22 @@
         android:layout_centerHorizontal="true"
         android:text="@string/textview2"
         android:textAppearance="@android:style/TextAppearance.Material" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clearCanvas"
+        android:text="@string/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/textView" />
+
+    <Button
+        android:text="@string/predict"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView" />
 
 </RelativeLayout>

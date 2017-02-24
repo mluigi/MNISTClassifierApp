@@ -41,4 +41,4 @@ android:
         - '.+'
 
 script:
-  - travis_wait 30 ./gradlew build
+  - ./gradlew build

@@ -2,5 +2,6 @@
     <string name="app_name">MNISTClassifierTest</string>
     <string name="textview">Predicted number is:</string>
     <string name="textview2">0</string>
-    <string name="button">Button</string>
+    <string name="button">Clear</string>
+    <string name="predict">Predict</string>
 </resources>
